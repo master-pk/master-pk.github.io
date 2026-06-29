@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gist — News in 60 Words</title>
+  <meta name="description" content="Gist delivers the news in 60-word neutral summaries. No account needed, no clutter. Every card links to the original source.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #f0f0f0;
+      --text-secondary: #888;
+      --accent: #e8f04a;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+    /* Nav */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 18px 0;
+    }
+    nav .wrap { display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; color: var(--text); }
+    .logo span { color: var(--accent); }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 em { color: var(--accent); font-style: normal; }
+    .hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin-bottom: 36px;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .badge strong { color: var(--text); }
+
+    /* How it works */
+    .section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .section h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+    }
+    .section p { color: var(--text-secondary); font-size: 16px; margin-bottom: 12px; }
+
+    .points { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 16px; }
+    .points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+    }
+    .point-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .points li strong { display: block; font-size: 15px; margin-bottom: 3px; }
+    .points li span { font-size: 14px; color: var(--text-secondary); }
+
+    /* Contact */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin-top: 24px;
+    }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .contact-row:first-child { padding-top: 0; }
+    .contact-icon { font-size: 18px; flex-shrink: 0; }
+    .contact-label { font-size: 12px; color: var(--text-secondary); margin-bottom: 2px; }
+    .contact-value { font-size: 15px; font-weight: 500; }
+
+    /* Privacy */
+    .privacy-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-top: 24px;
+    }
+    .privacy-block h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
+    .privacy-block p { font-size: 14px; color: var(--text-secondary); margin-bottom: 8px; }
+    .privacy-block p:last-child { margin-bottom: 0; }
+
+    /* Footer */
+    footer {
+      padding: 32px 0;
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+    footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+
+    @media (max-width: 480px) {
+      .hero { padding: 48px 0 40px; }
+      footer .wrap { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">Gi<span>st</span></div>
+    <a href="mailto:prakash.mishra005@gmail.com" style="font-size:14px;color:var(--text-secondary);">Contact</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero">
+    <h1>News in <em>60 words.</em><br>Nothing more.</h1>
+    <p>Gist gives you every story in a short, neutral summary — with a link to the original so you can always read more.</p>
+    <div class="badge">
+      <span>📱</span>
+      <span><strong>Android</strong> — available on Google Play</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">How it works</div>
+    <h2>Honest about what it is</h2>
+    <p>Gist is a news aggregator. It pulls articles from established outlets, compresses each one into a neutral ~60-word summary, and shows you the source name and a link to the full article on every card.</p>
+    <ul class="points">
+      <li>
+        <div class="point-icon">📰</div>
+        <div>
+          <strong>Source on every card</strong>
+          <span>The outlet name and a "Read full story" link are always visible — we never obscure where the news came from.</span>
+        </div>
+      </li>
+      <li>
+        <div class="point-icon">✍️</div>
+        <div>
+          <strong>Neutral paraphrase, not copy-paste</strong>
+          <span>Each summary is rewritten to inform, not to provoke. No word-for-word reproduction of the original.</span>
+        </div>
+      </li>
+      <li>
+        <div class="point-icon">🔄</div>
+        <div>
+          <strong>Fresh content</strong>
+          <span>The feed is updated continuously. Articles older than 72 hours are automatically removed from the deck.</span>
+        </div>
+      </li>
+      <li>
+        <div class="point-icon">🔒</div>
+        <div>
+          <strong>No account required</strong>
+          <span>No sign-up, no tracking. Bookmarks and preferences are stored only on your device.</span>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="section-label">Contact us</div>
+    <h2>Get in touch</h2>
+    <p>Questions about the app, a story, or a data request? We're reachable by email.</p>
+    <div class="contact-card">
+      <div class="contact-row">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:prakash.mishra005@gmail.com">prakash.mishra005@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">🌐</div>
+        <div>
+          <div class="contact-label">Website</div>
+          <div class="contact-value"><a href="https://master-pk.github.io/gist">master-pk.github.io/gist</a></div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-icon">👤</div>
+        <div>
+          <div class="contact-label">Developer</div>
+          <div class="contact-value">Prakash Mishra</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="privacy">
+    <div class="section-label">Privacy</div>
+    <h2>What we collect</h2>
+    <div class="privacy-block">
+      <h3>Data we do NOT collect</h3>
+      <p>Gist does not require an account. We do not collect your name, email address, location, or any personally identifiable information.</p>
+      <p>Bookmarks, section preferences, and reminder settings are stored locally on your device and are never transmitted to our servers.</p>
+    </div>
+    <div class="privacy-block" style="margin-top:16px;">
+      <h3>Data that may be collected</h3>
+      <p><strong>Ad data:</strong> Gist displays ads via Google AdMob. AdMob may collect device identifiers and usage data in accordance with <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+      <p><strong>Crash reports:</strong> Expo/EAS may collect anonymised crash data to help us fix bugs.</p>
+      <p>For questions about your data, contact us at <a href="mailto:prakash.mishra005@gmail.com">prakash.mishra005@gmail.com</a>.</p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Prakash Mishra · Gist</span>
+    <span><a href="#contact">Contact</a> · <a href="#privacy">Privacy</a></span>
+  </div>
+</footer>
+
+</body>
+</html>
