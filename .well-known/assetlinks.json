@@ -1,8 +1,14 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "com.factory.ludoroyale",
-    "sha256_cert_fingerprints": ["B1:83:7D:51:CD:09:4D:E8:27:E9:9C:1D:70:9E:3E:0F:CA:25:78:32:31:F3:33:7C:24:2F:DD:DF:C8:68:8E:E4"]
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.factory.ludoroyale",
+      "sha256_cert_fingerprints": [
+        "22:29:6B:90:2A:82:02:B4:A1:6C:FA:E0:41:80:7F:C6:AC:DD:0B:9B:36:BA:0C:C4:1F:46:EA:A1:97:BD:EC:8A"
+      ]
+    }
   }
-}]
+]
