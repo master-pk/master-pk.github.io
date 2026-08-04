@@ -1,0 +1,14 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["3439PUH83X.com.factory.ludoroyale"],
+        "paths": ["/ludo-royale-web/*"],
+        "components": [
+          { "/": "/ludo-royale-web/*" }
+        ]
+      }
+    ]
+  }
+}
