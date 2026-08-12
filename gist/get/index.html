@@ -45,6 +45,9 @@
        large as any badge beside it — equal visible height satisfies that. */
     .badge-google img { height: 68px; margin: -11px -8px; }
     .badge:hover { opacity: 0.85; text-decoration: none; }
+    /* Not-yet-published state: visibly inert, so nobody taps through to Apple's 404. */
+    .badge.soon { opacity: 0.35; cursor: default; pointer-events: none; }
+    .soon-note { margin-top: 18px; font-size: 13px; color: var(--text-secondary); }
     .note { margin-top: 28px; font-size: 13px; color: var(--text-secondary); }
     .note a { color: var(--text-secondary); text-decoration: underline; }
   </style>
@@ -55,13 +58,24 @@
     <h1>The day's news in 60 words</h1>
     <p class="sub">Neutral, sourced summaries you can read in a minute. No account needed.</p>
     <div class="btns">
+      <!-- TO ENABLE iOS: set IOS_LIVE = true in the script below AND swap this <span> back to the
+           anchor kept beside it. Gist is not on the App Store yet (appStoreState is
+           PREPARE_FOR_SUBMISSION), so apps.apple.com/app/id6797734445 returns 404 — which is
+           exactly the blank white page iPhone visitors were getting (founder 2026-08-11). The
+           markup, not just the JS, must stay dead while that is true, or visitors with JS
+           disabled would still tap through to the 404.
       <a class="badge badge-apple" id="ios" href="https://apps.apple.com/app/id6797734445">
         <img src="./badges/apple.svg" alt="Download on the App Store" width="138" height="46">
       </a>
+      -->
+      <span class="badge badge-apple soon" id="ios" aria-label="iPhone version coming soon">
+        <img src="./badges/apple.svg" alt="" width="138" height="46">
+      </span>
       <a class="badge badge-google" id="android" href="https://play.google.com/store/apps/details?id=com.factory.gist">
         <img src="./badges/google.png" alt="Get it on Google Play" width="176" height="68">
       </a>
     </div>
+    <p class="soon-note">iPhone version coming soon — available on Android today.</p>
     <p class="note">Free, with ads. <a href="https://master-pk.github.io/gist">About Gist</a></p>
   </div>
 
@@ -74,6 +88,11 @@
     //
     // No-JS clients and desktop see both buttons above, which is also what link-preview crawlers
     // index — better than a bare store URL.
+    // Flip to true the day the App Store listing goes live, and restore the commented-out anchor
+    // above. Until then apps.apple.com/app/id6797734445 is a 404 and redirecting an iPhone there
+    // shows a blank white page — worse than telling them the truth.
+    var IOS_LIVE = false;
+
     var APP_STORE = 'https://apps.apple.com/app/id6797734445';
     var PLAY = 'https://play.google.com/store/apps/details?id=com.factory.gist';
 
@@ -92,7 +111,7 @@
     var iosUrl = APP_STORE + '?ct=' + encodeURIComponent(campaign);
 
     document.getElementById('android').href = playUrl;
-    document.getElementById('ios').href = iosUrl;
+    if (IOS_LIVE) document.getElementById('ios').href = iosUrl;
 
     var ua = navigator.userAgent || '';
     var isAndroid = /Android/i.test(ua);
@@ -101,9 +120,10 @@
                 (/Macintosh/i.test(ua) && typeof navigator.maxTouchPoints === 'number' && navigator.maxTouchPoints > 1);
 
     // replace() so the store isn't trapped behind this page in the back stack.
-    if (isIOS) location.replace(iosUrl);
+    if (isIOS && IOS_LIVE) location.replace(iosUrl);
     else if (isAndroid) location.replace(playUrl);
-    // Desktop / unknown / crawlers: fall through and show both buttons.
+    // Desktop, unknown, crawlers — and iPhones while IOS_LIVE is false — fall through to the page
+    // itself, which states plainly that iOS is not out yet rather than dead-ending on Apple's 404.
   })();
   </script>
 </body>
