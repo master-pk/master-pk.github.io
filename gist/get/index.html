@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get Gist — News in 60 Words</title>
+  <meta name="description" content="Gist delivers the news in 60-word neutral summaries. No account needed. Every card links to the original source.">
+
+  <!-- Link previews in WhatsApp/iMessage/Slack render these. A shared card used to paste a raw
+       store URL, which previewed as a bare Google Play page even to iPhone recipients. -->
+  <meta property="og:title" content="Gist — the day's news in 60 words">
+  <meta property="og:description" content="Neutral, sourced summaries you can read in a minute. Free on iPhone and Android.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://master-pk.github.io/gist/get">
+  <meta name="twitter:card" content="summary">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0f0f0f; --surface: #1a1a1a; --border: #2a2a2a;
+      --text: #f0f0f0; --text-secondary: #888; --accent: #e8f04a; --radius: 12px;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+      padding: 24px; text-align: center;
+    }
+    .wrap { max-width: 420px; width: 100%; }
+    .logo { font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+    .logo span { color: var(--accent); }
+    h1 { font-size: clamp(24px, 5vw, 32px); font-weight: 800; letter-spacing: -0.8px; line-height: 1.2; margin-bottom: 12px; }
+    p.sub { color: var(--text-secondary); margin-bottom: 32px; }
+    .btns { display: flex; flex-direction: column; gap: 12px; }
+    a.btn {
+      display: block; padding: 16px 20px; border-radius: var(--radius);
+      font-weight: 700; font-size: 16px; text-decoration: none;
+      border: 1px solid var(--border); background: var(--surface); color: var(--text);
+    }
+    a.btn.primary { background: var(--accent); color: #0f0f0f; border-color: var(--accent); }
+    a.btn:hover { text-decoration: none; opacity: 0.9; }
+    .note { margin-top: 28px; font-size: 13px; color: var(--text-secondary); }
+    .note a { color: var(--text-secondary); text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo">Gist<span>.</span></div>
+    <h1>The day's news in 60 words</h1>
+    <p class="sub">Neutral, sourced summaries you can read in a minute. No account needed.</p>
+    <div class="btns">
+      <a class="btn primary" id="ios" href="https://apps.apple.com/app/id6797734445">Download on the App Store</a>
+      <a class="btn" id="android" href="https://play.google.com/store/apps/details?id=com.factory.gist">Get it on Google Play</a>
+    </div>
+    <p class="note">Free, with ads. <a href="https://master-pk.github.io/gist">About Gist</a></p>
+  </div>
+
+  <script>
+  (function () {
+    // WHY THIS PAGE EXISTS
+    // Share links used to be chosen by the SENDER's platform, so an iPhone user sharing a card
+    // handed their Android friend an App Store link, and vice versa. The sender's platform says
+    // nothing about the recipient's. This page is the single share URL; it resolves per RECIPIENT.
+    //
+    // No-JS clients and desktop see both buttons above, which is also what link-preview crawlers
+    // index — better than a bare store URL.
+    var APP_STORE = 'https://apps.apple.com/app/id6797734445';
+    var PLAY = 'https://play.google.com/store/apps/details?id=com.factory.gist';
+
+    var q = new URLSearchParams(location.search);
+    var source = q.get('s') || 'share';
+    var medium = q.get('m') || 'link';       // which platform the share was sent FROM
+    var campaign = q.get('c') || 'card_share';
+
+    // Play's install referrer must arrive URL-ENCODED as a single value: a raw "&" would be parsed
+    // as another Play parameter and the attribution silently lost.
+    var referrer = encodeURIComponent(
+      'utm_source=' + source + '&utm_medium=' + medium + '&utm_campaign=' + campaign
+    );
+    var playUrl = PLAY + '&referrer=' + referrer;
+    // Apple has no referrer equivalent; `ct` is its campaign token, reported in App Analytics.
+    var iosUrl = APP_STORE + '?ct=' + encodeURIComponent(campaign);
+
+    document.getElementById('android').href = playUrl;
+    document.getElementById('ios').href = iosUrl;
+
+    var ua = navigator.userAgent || '';
+    var isAndroid = /Android/i.test(ua);
+    // iPadOS 13+ reports a Macintosh UA, so touch points disambiguate a real iPad from a Mac.
+    var isIOS = /iPad|iPhone|iPod/i.test(ua) ||
+                (/Macintosh/i.test(ua) && typeof navigator.maxTouchPoints === 'number' && navigator.maxTouchPoints > 1);
+
+    // replace() so the store isn't trapped behind this page in the back stack.
+    if (isIOS) location.replace(iosUrl);
+    else if (isAndroid) location.replace(playUrl);
+    // Desktop / unknown / crawlers: fall through and show both buttons.
+  })();
+  </script>
+</body>
+</html>
