@@ -71,6 +71,8 @@
       color: var(--text-secondary);
     }
     .badge strong { color: var(--text); }
+    a.badge { text-decoration: none; transition: border-color .15s ease, background .15s ease; }
+    a.badge:hover { border-color: var(--text-secondary); background: var(--border); }
 
     /* How it works */
     .section { padding: 60px 0; border-bottom: 1px solid var(--border); }
@@ -169,9 +171,15 @@
   <section class="hero">
     <h1>News in <em>60 words.</em><br>Nothing more.</h1>
     <p>Gist gives you every story in a short, neutral summary — with a link to the original so you can always read more.</p>
-    <div class="badge">
-      <span>📱</span>
-      <span><strong>Android</strong> — available on Google Play</span>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <a class="badge" href="https://apps.apple.com/app/id6797734445" target="_blank" rel="noopener">
+        <span>🍎</span>
+        <span><strong>iPhone</strong> — Download on the App Store</span>
+      </a>
+      <a class="badge" href="https://play.google.com/store/apps/details?id=com.factory.gist" target="_blank" rel="noopener">
+        <span>📱</span>
+        <span><strong>Android</strong> — Get it on Google Play</span>
+      </a>
     </div>
   </section>
 
