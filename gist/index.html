@@ -8,13 +8,15 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* Palette mirrors the app's light theme (lib/theme.ts): white ground, #1E5BD6 primary blue. */
     :root {
-      --bg: #0f0f0f;
-      --surface: #1a1a1a;
-      --border: #2a2a2a;
-      --text: #f0f0f0;
-      --text-secondary: #888;
-      --accent: #e8f04a;
+      --bg: #FFFFFF;
+      --surface: #F4F5F7;
+      --border: #E6E8EC;
+      --text: #101317;
+      --text-secondary: #5A6472;
+      --accent: #1E5BD6;
+      --accent-soft: #DBE1FF;
       --radius: 12px;
     }
 
@@ -72,7 +74,33 @@
     }
     .badge strong { color: var(--text); }
     a.badge { text-decoration: none; transition: border-color .15s ease, background .15s ease; }
-    a.badge:hover { border-color: var(--text-secondary); background: var(--border); }
+    a.badge:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+    /* Official store badges */
+    .store-badges { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .store-badges a { display: inline-flex; transition: opacity .15s ease; }
+    .store-badges a:hover { opacity: .85; text-decoration: none; }
+    .store-badges .apple img { height: 52px; width: auto; }
+    .store-badges .google img { height: 76px; width: auto; margin: -12px; }
+
+    /* Screenshots strip */
+    .shots {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 24px 2px 12px;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+    }
+    .shots img {
+      width: 220px;
+      height: auto;
+      flex-shrink: 0;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      scroll-snap-align: start;
+      box-shadow: 0 8px 24px rgba(16, 19, 23, .10);
+    }
 
     /* How it works */
     .section { padding: 60px 0; border-bottom: 1px solid var(--border); }
@@ -171,15 +199,28 @@
   <section class="hero">
     <h1>News in <em>60 words.</em><br>Nothing more.</h1>
     <p>Gist gives you every story in a short, neutral summary — with a link to the original so you can always read more.</p>
-    <div style="display:flex; gap:10px; flex-wrap:wrap;">
-      <a class="badge" href="https://apps.apple.com/app/id6797734445" target="_blank" rel="noopener">
-        <span>🍎</span>
-        <span><strong>iPhone</strong> — Download on the App Store</span>
+    <div class="store-badges">
+      <a class="apple" href="https://apps.apple.com/app/id6797734445" target="_blank" rel="noopener">
+        <img src="get/badges/apple.svg" alt="Download on the App Store">
       </a>
-      <a class="badge" href="https://play.google.com/store/apps/details?id=com.factory.gist" target="_blank" rel="noopener">
-        <span>📱</span>
-        <span><strong>Android</strong> — Get it on Google Play</span>
+      <a class="google" href="https://play.google.com/store/apps/details?id=com.factory.gist" target="_blank" rel="noopener">
+        <img src="get/badges/google.png" alt="Get it on Google Play">
       </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Screenshots</div>
+    <h2>What it looks like</h2>
+    <p>Swipe through story cards, follow trending topics, and get a daily briefing — here's the app as you'll see it.</p>
+    <div class="shots">
+      <img src="screens/01_screen.webp" alt="Gist app — a news story card with photo, headline and 60-word summary" loading="lazy" width="480" height="853">
+      <img src="screens/02_screen.webp" alt="Gist app screenshot" loading="lazy" width="480" height="853">
+      <img src="screens/03_screen.webp" alt="Gist app screenshot" loading="lazy" width="480" height="853">
+      <img src="screens/04_screen.webp" alt="Gist app screenshot" loading="lazy" width="480" height="853">
+      <img src="screens/05_screen.webp" alt="Gist app screenshot" loading="lazy" width="480" height="853">
+      <img src="screens/06_screen.webp" alt="Gist app screenshot" loading="lazy" width="480" height="853">
+      <img src="screens/07_screen.webp" alt="Gist app screenshot" loading="lazy" width="480" height="853">
     </div>
   </section>
 
