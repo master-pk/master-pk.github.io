@@ -4,9 +4,9 @@
     "details": [
       {
         "appIDs": ["3439PUH83X.com.factory.ludoroyale"],
-        "paths": ["/ludo-royale-web/*"],
+        "paths": ["/ludo-royale-web/join.html", "/ludo-royale-web/join.html?*"],
         "components": [
-          { "/": "/ludo-royale-web/*" }
+          { "/": "/ludo-royale-web/join.html", "comment": "invite links only — the home, privacy and delete-account pages open in Safari" }
         ]
       }
     ]
